@@ -1,0 +1,87 @@
+?@charset "UTF-8";
+/**
+ * Stylesheet: example_jquerytools.css
+ *
+ * (c) 2011-2012 Zazar Ltd
+ * 
+ * Description: Example stylesheet using zWeatherFeed with jQuery Tools
+ *
+ **/
+@font-face {
+    font-family: 'open_sans_lightregular';
+    src: url('themes/opensans-light.eot');
+    src: url('themes/opensans-light.eot?#iefix') format('embedded-opentype'),
+         url('themes/opensans-light.woff') format('woff'),
+         url('themes/opensans-light.ttf') format('truetype'),
+         url('themes/opensans-light.svg#open_sans_lightregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+body {
+	font-family: 'open_sans_lightregular';
+}
+
+.weatherFeed {
+	font-family: 'open_sans_lightregular';
+	font-size: 90%;
+	margin: 2em 3em;
+	width: 280px;
+	color: #ccc;
+}
+.weatherFeed a { color: #fff; }
+.weatherFeed a:hover {
+	color: #fff;
+	text-decoration: none;
+}
+.weatherItem {
+	text-align: center;
+}
+.weatherCity { text-transform: uppercase; color: #000;font-size:45px;letter-spacing:2px; }
+.weatherTemp {
+font-size:52px;
+	font-weight: bold;
+	color: #eee;
+}
+.weatherDesc, .weatherCity { font-weight: bold;color:#fff; }
+.weatherDesc { margin-bottom: 0.4em; color: #eee; }
+.weatherRange, .weatherWind { font-size: 0.8em; }
+.weatherLink {
+	margin-top: 6px;
+	text-align: left;
+	font-size: 0.8em;
+}
+
+.vertical {  
+position:absolute;
+	overflow:hidden;	
+	height: 150px;	 
+	width: 100%;
+	background: transparent;
+    left:50%;
+    margin-left:-145px;
+
+}
+
+.items {
+	position:absolute;
+	height:20000em;	
+	margin: 0px;
+}
+.items div.weatherItem { height: 160px; }
+
+.navi {
+	width:288px;
+	height:20px;
+}
+.navi a {
+	width:8px;
+	height:8px;
+	float:left;
+	margin:3px;
+	background: url('navigator.png') 0 0 no-repeat;
+	display:block;
+	font-size:1px;
+}
+.navi a:hover { background-position:0 -8px; }
+.navi a.active { background-position:0 -16px; }

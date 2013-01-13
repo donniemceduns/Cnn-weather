@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns	= "http://www.w3.org/ns/widgets"
+	xmlns:gap	= "http://phonegap.com/ns/1.0"
+	id			= "com.wexather.com"
+	version		= "1.0.0">
+
+	<name>CNN Weather App</name>
+
+	<description>
+	Cnn weather is a minimalist weather app that makes it easy to accesss weather conditions for any citiy in the world and it also gives upto date weather news/reports from Cnn.
+        Features
+       - Automatically get weather for your current city
+       - 4 day weather Forecast 
+       -Search Weather for any city in the world
+       - Read the latest Tweets from @CnnweatherCenter  
+       -Follow weather topics such as Tornadoes,Floods disaster e.t.c 
+        please note this app is not from Cnn 
+	</description>
+
+	<author href="http://facebook.com/weatherafrica">
+		Donnie Ibiyemi
+	</author>
+           
+        <feature name="http://api.phonegap.com/1.0/geolocation"/>
+        <gap:platforms>
+		<gap:platform name="android" minVersion="2.1" />
+	</gap:platforms>
+
+<icon src="icon.png" />
+
+ <gap:splash src="splash.png" />
+
+<preference name="load-url-timeout" value="85000" />
+<preference name="fullscreen" value="true" />
+
+<access origin="*" subdomains="true" />
+
+<gap:plugin name="ChildBrowser" />
+
+</widget>

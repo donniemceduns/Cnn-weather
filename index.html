@@ -1,0 +1,1859 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="CoffeeCup HTML Editor (www.coffeecup.com)">
+    <meta name="created" content="Fri, 16 Nov 2012 14:36:29 GMT">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>Cnn Nano</title>
+    <script src="phonegap.js"></script>
+<script src="childbrowser.js"></script>
+	<link rel="stylesheet" href="themes/jquery.mobile-1.2.0.css" />
+<script src="js/jquery-1.8.2.min.js"></script>
+<script src="js/jquery.mobile-1.2.0.js"></script>
+   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>            
+          
+  <script type="text/javascript">
+    var geocoder;
+      
+    $(document).ready(function() {
+      geocoder = new google.maps.Geocoder();
+                      
+      $('#button-get-reverse-lookup').click(function(){
+        navigator.geolocation.getCurrentPosition(onGetCurrentPositionSuccess, onGetCurrentPositionError);
+      });
+    });
+                    
+    var onGetCurrentPositionSuccess = function(position) {
+      console.log("lat: " + position.coords.latitude);
+      console.log("long: " + position.coords.longitude);
+      var lat = parseFloat(position.coords.latitude);
+      var lng = parseFloat(position.coords.longitude);
+                        
+      // paris, france - uncomment to test
+      //var lat = parseFloat(48.850258);
+      //var lng = parseFloat(2.351074);
+                        
+      // tiburon, california
+      //var lat = parseFloat(37.872685);
+      //var lng = parseFloat(-122.45224);
+                        
+      var latlng = new google.maps.LatLng(lat, lng);
+                        
+      geocoder.geocode({'latLng': latlng}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          if (results[0]) {
+            var arrAddress = results[0].address_components;
+            // iterate through address_component array
+            $.each(arrAddress, function (i, address_component) {
+              if (address_component.types[0] == "locality") {
+                console.log(address_component.long_name); // city
+			var	car = address_component.long_name;
+			window.location.href="http://www.zaweather.com/cool.php?name=" + car;
+			
+                 return false; // break
+              }
+            });
+          } else {
+            alert("No results found");
+          }
+        } else {
+          alert("Geocoder failed due to: " + status);
+        }
+      });
+    }
+  
+    var onGetCurrentPositionError = function(error) { 
+      console.log("Couldn't get geo coords from device");
+    } 
+  </script> 
+
+ <style type="text/css">
+@font-face {
+    font-family: 'open_sans_lightregular';
+    src: url('fonts/opensans-light.eot');
+    src: url('fonts/opensans-light.eot?#iefix') format('embedded-opentype'),
+         url('fonts/opensans-light.woff') format('woff'),
+         url('fonts/opensans-light.ttf') format('truetype'),
+         url('fonts/opensans-light.svg#open_sans_lightregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}search {
+
+}
+
+#search input[type="text"] {
+    background: url(foto/search-white.png) no-repeat 10px 6px #fff;
+    border: 1px solid #d1d1d1;
+    font: normal 18px open_sans_lightregular;
+    color: #000;
+    width:100%;
+    padding: 6px 15px 6px 45px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    text-shadow:none;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+    -webkit-transition: all 0.7s ease 0s;
+    -moz-transition: all 0.7s ease 0s;
+    -o-transition: all 0.7s ease 0s;
+    transition: all 0.7s ease 0s;
+    }
+
+#search input[type="text"]:focus {
+    width: 100%;
+    }
+	.classname {
+	background:rgba(255,255,255,0.3);
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	border-radius:2px;
+	border:1px solid transparent;
+	display:inline-block;
+	color:#fff;
+	font-family:'open_sans_lightregular';
+	font-size:16px;
+	font-weight:normal;
+	padding:7px 79px;
+	text-decoration:none;
+	text-shadow:none;
+}.classname:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+	background-color:#dfdfdf;
+}.classname:active {
+	position:relative;
+	top:1px;
+	
+}
+#lol{
+		 font-family: 'open_sans_lightregular';
+		 text-shadow:none;
+		 font-size:22px;
+		 font-weight:normal;
+		 margin-top:14px;
+color:#fff;
+		 }
+		 a {
+		 color:#fff;
+		 text-shadow:none;
+		  }
+    </style>
+    <!--[if IE]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body >
+  <link href="themes/example_jquerytools.css" rel="stylesheet" type="text/css" />
+  <script src="js/jquery.tools.min.js"></script>
+    <script src="js/jquery.zweatherfeed.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function () {
+	$('#test').weatherfeed(['FRXX0076','UKXX0085','JAXX0085','USAR0585','NIXX0012','CHXX0008','ASXX0112'],{},function(e) {
+		$("div.scrollable").scrollable({ 
+        		vertical: true,  
+	        	size: 1
+		}).circular().navigator().autoscroll({
+			interval: 3000
+		});
+	});
+});
+</script>
+
+
+<link href="themes/jquery.ztwitterfeed.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery.ztwitterfeed.js" type="text/javascript"></script>
+ <script type="text/javascript">
+$(document).ready(function () {
+	$('#tweet').twitterfeed('CNNweather',{
+		limit: 15 , header:false , tweettime:true
+	});
+});
+</script>
+<script>
+$(document).ready(function () {
+$("#me").position({
+   my: "center",
+   at: "center",
+   of: $('#free')
+});
+});
+</script>
+
+<div data-role="page"  id="home"   style="background:-webkit-gradient(linear, 80% 20%, 10% 21%, from(#C71700), to(#B51028));background-position:center center;background-size:100% 100%;text-shadow:none">
+    
+				<div data-role="content"  style="padding:10px;" >
+				<div class="ui-grid-a" data-theme="a" >
+            <div class="ui-block-a" style="width:50%;text-align:center;border:3px solid transparent;"><a href="#locate" data-transition="slideup" style="text-decoration:none;font-weight:normal;"><div class="ui-bar ui-bar-r" style="height:120px;background:rgba(255,255,255,0.2);-webkit-border-radius:8px;border-radius:6px;" ><img src="foto/find.png" style="margin-top:25px;" width="60" /><p style="color:#fff;">Find Me</p></div></a></div>
+	       <div class="ui-block-b" style="width:50%;text-align:center;border:3px solid transparent;border-radius:6px;"><a href="#find" data-transition="slideup" style="text-decoration:none;font-weight:normal;"><div class="ui-bar ui-bar-r" style="height:120px;background:rgba(255,255,255,0.2);-webkit-border-radius:6px;border-radius:8px;" ><img src="foto/lenz.png" style="margin-top:18px;" width="50" /><p style="color:#fff;">Search</p></div></a></div>
+			    </div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" >
+            <div class="ui-block-a" style="width:100%;text-align:center;border:3px solid transparent;"><div class="ui-bar ui-bar-r" style="height:140px;background:rgba(255,255,255,0.2);-webkit-border-radius:6px;border-radius:6px;"  id="free">
+			
+					
+		<div class="scrollable vertical"  style="margin-top:3px;background:transparent;" >
+	<div id="test" style="background:transparent;" class="items"></div>
+</div>
+			</div></div>
+			    </div>
+				
+	
+	
+	
+	<div class="ui-grid-a" data-theme="a" >
+		    <div class="ui-block-a" style="width:50%;border:3px solid transparent;text-align:center;" ><a href="#places" data-transition="slideup" style="text-decoration:none;font-weight:normal;"><div class="ui-bar ui-bar-r"  style="height:120px;background:rgba(255,255,255,0.2);text-shadow:none;color:#fff;-webkit-border-radius:5px;border-radius:6px;"><img src="foto/compass.png" style="margin-top:15px;" width="54" /><p style="color:#fff;">Locations</p></div></a></div>
+	   <div class="ui-block-b" style="width:50%;border:3px solid transparent;text-align:center;" ><a href="#central" data-transition="slideup" style="text-decoration:none;font-weight:normal;"><div class="ui-bar ui-bar-r"  style="height:120px;background:rgba(255,255,255,0.2);text-shadow:none;color:#fff;-webkit-border-radius:6px;border-radius:6px;"><img src="foto/tweet.png" style="margin-top:17px;" width="60" /><p style="color:#fff;margin-top:7px;">@Weathercenter</p></div></a></div>
+  </div>
+	
+	
+	<div class="ui-grid-a" data-theme="a"  >
+	        <div class="ui-block-a" style="width:50%;border:3px solid transparent;text-align:center;" ><a href="#topics" data-transition="slideup" style="text-decoration:none;font-weight:normal;"><div class="ui-bar ui-bar-r"  style="height:120px;background:rgba(255,255,255,0.2);text-shadow:none;color:#fff;-webkit-border-radius:6px;border-radius:6px;"><img src="foto/news.png" style="margin-top:32px;" width="54" /><p style="color:#fff;">Stories</p></div></a></div>
+			<div class="ui-block-b" style="width:50%;border:3px solid transparent;text-align:center;" onClick="document.location.reload(true)" ><div class="ui-bar ui-bar-r"  style="height:120px;background:rgba(255,255,255,0.2);text-shadow:none;color:#fff;-webkit-border-radius:5px;border-radius:5px;"><img src="foto/refresh.png" style="margin-top:27px;" width="54" /><p style="color:#fff;">Refresh</p></div></div>
+	   
+			    </a></div>
+	
+				</div>
+</div>
+</div>
+<!----------------------------------------------------End of Frontpage------------------------------------------>
+
+<div data-role="page"  id="find"   style="background:-webkit-gradient(linear, 80% 20%, 10% 21%, from(#C71700), to(#B51028));text-shadow:none">
+    
+				<div data-role="content"  style="padding:0px;" >
+				<div class="ui-grid-a" data-theme="a" >
+            <div class="ui-block-a" style="width:100%;text-align:center;border:0px solid transparent;margin-top:70px;"><div class="ui-bar ui-bar-r" style="height:190px;background:transparent;text-align:center;"  id="free">
+			<p><img src="foto/search.png" /></p>
+			<p style="font-size:16px;color:#fff;font-weight:normal;text-shadow:none"> Get weather for places around the world</p>
+				<form method="get" action="http://zaweather.com/cool.php"  id="search">
+  <input name="name" type="text" size="40" placeholder="Enter a City Name" />
+</form>	
+		
+			</div></div>
+			    </div>
+
+				</div>
+		
+
+<div data-role="footer" data-position="fixed" style="border:0px solid transparent;" >
+<div class="ui-grid-a" data-theme="a" >
+            <div class="ui-block-a" style="width:100%;border:0px solid transparent;position:fixed;bottom:0px;"><div class="ui-bar ui-bar-r" style="height:45px;background:rgba(0,0,0,0.5);"  id="free">
+			<div style="position:fixed;" ONCLICK="history.go(-1)">
+			<img src="foto/back2.png" width="38" style="margin-top:4px;" />
+			</div>
+			
+			<p style="text-align:center;margin-top:4px">
+			<a href="#home" data-transition="slidedown">
+			<img src="foto/home.png" width="38" />
+			</a>
+			</p>
+		
+		<p style="text-align:right;margin-top:-60px"  onclick="history.go(1)">
+			<img src="foto/next2.png" width="38" />
+			</p>
+		
+			</div></div>
+			    </div>
+</div>
+		
+</div>
+
+<!------------------------------------End of Search---------------------------------->
+
+<div data-role="page" id="locate"    style="background:-webkit-gradient(linear, 80% 20%, 10% 21%, from(#C71700), to(#B51028));background-position:center center;background-size:100% 100%;text-shadow:none">
+    
+				<div data-role="content"  style="padding:0px;" >
+				<div class="ui-grid-a" data-theme="a" >
+            <div class="ui-block-a" style="width:100%;text-align:center;border:0px solid transparent;margin-top:70px;"><div class="ui-bar ui-bar-r" style="height:290px;background:transparent;text-align:center;"  id="free">
+			<p><img src="foto/locates.png"  style="margin-bottom:10px;" /></p>
+			<p style="font-size:16px;color:#fff;font-weight:normal;text-shadow:none"> Get the weather for your current location</p>
+			 <div  id="button-get-reverse-lookup" class="classname">Find My Location</div>
+		         <div onclick="window.location.href='#places';"  style="margin-top:22px;" id="button-get-reverse-lookup" class="classname">Select a City</div>
+
+			</div></div>
+			    </div>
+
+				</div>
+		
+
+<div data-role="footer" data-position="fixed" style="border:0px solid transparent;" >
+<div class="ui-grid-a" data-theme="a" >
+            <div class="ui-block-a" style="width:100%;border:0px solid transparent;position:fixed;bottom:0px;"><div class="ui-bar ui-bar-r" style="height:45px;background:rgba(0,0,0,0.5);"  id="free">
+			<div style="position:fixed;" ONCLICK="history.go(-1)">
+			<img src="foto/back2.png" width="38" style="margin-top:4px;" />
+			</div>
+			
+			<p style="text-align:center;margin-top:4px">
+			<a href="#home" data-transition="slidedown">
+			<img src="foto/home.png" width="38" />
+			</a>
+			</p>
+		
+		<p style="text-align:right;margin-top:-60px"  onclick="history.go(1)">
+			<img src="foto/next2.png" width="38" />
+			</p>
+		
+			</div></div>
+			    </div>
+</div>
+		
+</div>
+
+<!-----------------------------------End of Locate------------------------------------------->
+
+<div data-role="page"  id="topics"   style="background:-webkit-gradient(linear, 80% 20%, 10% 21%, from(#C71700), to(#B51028));text-shadow:none">
+   
+				<div data-role="content"  style="padding:0px;">
+				<div style="width:100%;background:-webkit-gradient(linear, 80% 20%, 10% 21%, from(#C71700), to(#B51028));height:200px;text-align:center;padding:0px;margin-top:0px;" >
+				<img src="foto/clouds.png"  style="margin-top:44px;" />
+				</div>
+             
+					 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none;color:#fff;font-family:'open_sans_lightregular';font-size:22px;" href="look.html?link=http://topics.edition.cnn.com/topics/feeds/rss/Weather" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border:0px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Weather Stories</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border:0px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			    </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none;color:#fff;font-family:'open_sans_lightregular';font-size:22px;" href="look.html?link=http://topics.edition.cnn.com/topics/feeds/rss/Hurricanes_and_Cyclones" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Hurricanes </p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			   </a> </div>
+			   
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none;color:#fff;font-family:'open_sans_lightregular';font-size:22px;" href="look.html?link=http://topics.edition.cnn.com/topics/feeds/rss/Winter_Weather" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent";"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Winter Weather</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			   </a> </div>
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none;color:#fff;font-family:'open_sans_lightregular';font-size:22px;" href="look.html?link=http://rss.cnn.com/rss/edition_travel.rss" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Cnn Travel</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			    </a></div>
+				
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none;color:#fff;font-family:'open_sans_lightregular';font-size:22px;" href="look.html?link=http://topics.edition.cnn.com/topics/feeds/rss/Natural_Disasters" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Natural disasters</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none;color:#fff;font-family:'open_sans_lightregular';font-size:22px;" href="look.html?link=http://topics.edition.cnn.com/topics/feeds/rss/Tornadoes" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Tornadoes</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			    </a></div>
+				
+			
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none;color:#fff;font-family:'open_sans_lightregular';font-size:22px;font-weight:normal;" href="look.html?link=http://topics.edition.cnn.com/topics/feeds/rss/floods" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Flood Disasters</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			    </a></div>
+				
+				
+				
+				
+				</div>
+		
+
+<div data-role="footer" data-position="fixed" style="border:0px solid transparent;" >
+<div class="ui-grid-a" data-theme="a" >
+            <div class="ui-block-a" style="width:100%;border:0px solid transparent;position:fixed;bottom:0px;"><div class="ui-bar ui-bar-r" style="height:45px;background:rgba(0,0,0,0.7);"  id="free">
+			<div style="position:fixed;" ONCLICK="history.go(-1)">
+			<img src="foto/back2.png" width="38" style="margin-top:4px;" />
+			</div>
+			
+			<p style="text-align:center;margin-top:4px">
+			<a href="#home" data-transition="slidedown">
+			<img src="foto/home.png" width="38" />
+			</a>
+			</p>
+		
+		<p style="text-align:right;margin-top:-60px"  onclick="history.go(1);">
+			<img src="foto/next2.png" width="38" />
+			</p>
+		
+			</div></div>
+			    </div>
+</div>
+		
+</div>
+
+<!---------------------------------------------End of Topics-------------------------------------->
+
+
+		
+
+
+
+<!-----------------------------------end of Places----------------------------------------->
+<div data-role="page"  id="central"   style="background:-webkit-gradient(linear, 80% 20%, 10% 21%, from(#C71700), to(#B51028));background-size:100% 100%;text-shadow:none">
+				<div data-role="content"  style="padding:0px;" >
+ <div class="ui-grid-a" data-theme="a" style="margin-top:0px;" >
+            <div class="ui-block-a" style="width:100%;text-align:center;border:0px solid transparent;padding:0px;margin-left:-1px;"><div class="ui-bar ui-bar-a" style="height:180px;background:-webkit-gradient(linear, 80% 20%, 10% 21%, from(#C71700), to(#B51028));text-align:center;-webkit-border-radius:0px;border-radius:0px;margin-bottom:-19px;"  id="free">
+			
+		<img src="foto/large.png" width="120" style="margin-top:35px;" />
+			</div></div>
+			    </div>
+				
+				<div id="tweet"></div>
+		
+			
+	
+				</div>
+		
+
+
+	<div data-role="footer" data-position="fixed" style="border:0px solid transparent;" >
+<div class="ui-grid-a" data-theme="a" >
+            <div class="ui-block-a" style="width:100%;border:0px solid transparent;position:fixed;bottom:0px;"><div class="ui-bar ui-bar-r" style="height:45px;background:rgba(0,0,0,0.5);"  id="free">
+			<div style="position:fixed;" ONCLICK="history.go(-1)">
+			<img src="foto/back2.png" width="38" style="margin-top:4px;" />
+			</div>
+			
+			<p style="text-align:center;margin-top:4px">
+			<a href="#home" data-transition="slidedown">
+			<img src="foto/home.png" width="38" />
+			</a>
+			</p>
+		
+		<p style="text-align:right;margin-top:-60px"  onclick="history.go(1)">
+			<img src="foto/next2.png" width="38" />
+			</p>
+		
+			</div></div>
+			    </div>
+</div>
+			
+</div>
+
+<!---------------------------------------------------places------------------------------------------------>
+<div data-role="page"  id="places"   style="background:-webkit-gradient(linear, 80% 20%, 10% 21%, from(#C71700), to(#B51028));text-shadow:none">
+   
+				<div data-role="content"  style="padding:0px;">
+				<div style="width:100%;background:-webkit-gradient(linear, 80% 20%, 10% 21%, from(#C71700), to(#B51028));height:200px;text-align:center;padding:0px;margin-top:0px;" >
+				<img src="foto/compass.png"  style="margin-top:55px;"  />
+				</div>
+             <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Abu Dhabi" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border:0px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Abu Dhabi</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border:0px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			    </a></div>
+				
+			<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Abuja" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Abuja</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+					
+			<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Accra" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Accra</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Adamstown" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Adamstown</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Addis Ababa" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Addis Ababa</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Algiers" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Algiers</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+			
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Alofi" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Alofi</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Amman" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Amman</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Amsterdam" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Amsterdam</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Andorra la Vella" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Andorra la Vella</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Ankara" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Ankara</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Antananarivo" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Antananarivo</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Apia" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Apia</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Ashgabat" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Ashgabat</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Asmarat" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Asmara</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Astana" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Astana</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Asunción" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Asunción</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Athens" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Athens</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Avarua" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Avarua</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Baghdad" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Baghdad</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Baku" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Baku</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Bamako" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Bamako</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Bandar Seri Begawan" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Bandar Seri Begawan</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Bangkok" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Bangkok</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Bangui" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Bangui</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Banjul" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Banjul</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Basseterre" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Basseterre</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Beijing" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Beijing</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Beirut" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Beirut</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Belfast" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Belfast</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Belgrade" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Belgrade</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Belmopan" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Belmopan</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Berlin" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Berlin</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Bern" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Bern</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Bishkek" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Bishkek</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Bissau" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Bissau</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solidtransparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Bogotá" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Bogotá</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Brasília" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Brasília</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			  
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Bratislava" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Bratislava</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Brazzaville" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Brazzaville</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Bridgetown" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Bridgetown</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Brussels" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Brussels</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Bucharest" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Bucharest</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Budapest" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Budapest</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Buenos Aires" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Buenos Aires</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Bujumbura" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Bujumbura</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Cairo" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Cairo</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Canberra" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Canberra</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Caracas" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Caracas</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Cardiff" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Cardiff</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Castries" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Castries</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Cayenne" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Cayenne</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Charlotte Amalie" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Charlotte Amalie</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Chisinau" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Chisinau</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Cockburn Town" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Cockburn Town</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Conakry" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Conakry</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Copenhagen" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Copenhagen</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Dakar" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Dakar</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Damascus" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Damascus</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Dhaka" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Dhaka</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Dili" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Dili</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Djibouti" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Djibouti</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Dar es Salaam" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Dar es Salaam</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Doha" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Doha</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Douglas" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Douglas</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Dublin" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Dublin</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Dushanbe" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Dushanbe</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Edinburgh" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Edinburgh</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Edinburgh of the Seven Seas" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Edinburgh of the Seven Seas</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=El Aaiún" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">El Aaiún</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Episkopi Cantonment" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Episkopi Cantonment</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Flying Fish Cove" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Flying Fish Cove</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Freetown" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Freetown</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Funafuti" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Funafuti</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Gaborone" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Gaborone</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=George Town" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">George Town</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Georgetown" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Georgetown</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Gibraltar" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Gibraltar</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Grytviken" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Grytviken</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Guatemala City" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Guatemala City</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Gustavia" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Gustavia</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Hagåtña" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Hagåtña</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+
+
+
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Hamilton" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Hamilton</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+								
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Hanga Roa" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Hanga Roa</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Hanoi" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Hanoi</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Harare" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Harare</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Hargeisa" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Hargeisa</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Havana" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Havana</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+			
+			<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Helsinki" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Helsinki</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solidtransparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>	
+				
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Honiara" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Honiara</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>	
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Islamabad" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Islamabad</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>	
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Jakarta" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Jakarta</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Jamestown" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Jamestown</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Jerusalem" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Jerusalem</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Juba" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Juba</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Kabul" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Kabul</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Kampala" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Kampala</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Kathmandu" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Kathmandu</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Khartoum" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Khartoum</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Kiev" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Kiev</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Kigali" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Kigali</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Kingston" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Kingston</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Kingston , Norfolk Island" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Kingston ,Norfolk Island</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Kingstown" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Kingstown</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Kinshasa" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Kinshasa</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Kuala Lumpur" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Kuala Lumpur</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Kuwait City" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Kuwait City</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Libreville" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Libreville</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Lilongwe" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Lilongwe</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Lima" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Lima</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Lisbon" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);"><p id="lol">Lisbon</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Lomé" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Lomé</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=London" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">London</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Luanda" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Luanda</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Lusaka" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Lusaka</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Luxembourg" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Luxembourg</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Madrid" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Madrid</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Majuro" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Majuro</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Malabo" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Malabo</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Malé" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Malé</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Managua" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Managua</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Manama" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Manama</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Manila" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Manila</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Maputo" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Maputo</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Marigot" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Marigot</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Maseru" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Maseru</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Mata-Utu" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Mata-Utu</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Mbabane" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Mbabane</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Melekeok" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Melekeok</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Mexico City" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Mexico City</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Minsk" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Minsk</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Mogadishu" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Mogadishu</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Monaco" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Monaco</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+
+
+<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Monrovia" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Monaco</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>				
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Montevideo" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Montevideo</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Moroni" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Moroni</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Moscow" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Moscow</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Muscat" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Muscat</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Nairobi" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Nairobi</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Nassau" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Nassau</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Naypyidaw" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Naypyidaw</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=N'Djamena" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">N'Djamena</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=New Delhi" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">New Delhi</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+
+
+           <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Niamey" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Niamey</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>				
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Nicosia" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Nicosia</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>	
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Nouakchott" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Nouakchott</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>	
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Nouméa" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Nouméa</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>	
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Nuuk" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Nuuk</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>	
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Oranjestad" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Oranjestad</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>	
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Oslo" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Oslo</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>	
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Ottawa" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Ottawa</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Ouagadougou" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Ouagadougou</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Pago Pago" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Pago Pago</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Palikir" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Palikir</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Panama City" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Panama City</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Papeete" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Papeete</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Paramaribo" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Paramaribo</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Paris" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Paris</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Philipsburg" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Philipsburg</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Phnom Penh" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Phnom Penh</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Plymouth" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Plymouth</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Podgorica" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Podgorica</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Port Louis" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Port Louis</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Port Moresby" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Port Moresby</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Port Vila" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Port Vila</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Port-au-Prince" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Port-au-Prince</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Porto-Novo" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Porto-Novo</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Prague" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Prague</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Praia" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Praia</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Pretoria" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Pretoria</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Pristina" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Pristina</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Pyongyang" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Pyongyang</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Quito" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Quito</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Rabat" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Rabat</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Reykjavík" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Reykjavík</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Riga" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Riga</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Riyadh" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Riyadh</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Road Town" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Road Town</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Rome" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Rome</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Roseau" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Roseau</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Saipan" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Saipan</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=San José" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">San José</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=San Juan" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">San Juan</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=San Marino" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">San Marino</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=San Salvador" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">San Salvador</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Sanaá" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Sanaá</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Sanaá" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Santiago</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Santo Domingo" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Santo Domingo</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=São Tomé" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">São Tomé</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Sarajevo" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Sarajevo</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Seoul" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Seoul</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Singapore" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Singapore</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Skopje" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Skopje</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Sofia" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Sofia</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Sri Jayawardenapura-Kotte" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Sri Jayawardenapura-Kotte </p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=St. George's" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">St. George's </p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=St. Helier" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">St. Helier</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=St. John's" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">St. John's</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=St. Peter Port" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">St. Peter Port</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=St. Pierre" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">St. Pierre</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Stanley" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Stanley</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Stepanakert" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Stepanakert</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Stockholm" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Stockholm</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Sucre" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Sucre</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Sukhumi" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Sukhumi</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Suva" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Suva</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Taipei" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Taipei</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Tallinn" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Tallinn</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Tarawa" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Tarawa</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Tashkent" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Tashkent</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Tbilisi" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Tbilisi</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Tegucigalpa" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Tegucigalpa</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Tehran" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Tehran</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				 <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Thimphu" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Thimphu</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			 
+			  <div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Tirana" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Tirana</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Tiraspol" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Tiraspol</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Tokyo" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Tokyo</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Tórshavn" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Tórshavn</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Tripoli" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Tripoli</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Tripoli" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Tripoli</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Tskhinvali" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Tskhinvali</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Tunis" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Tunis</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Ulan Bator" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Ulan Bator</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Vaduz" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Vaduz</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Valletta" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Valletta</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=The Valley" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">The Valley</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Vatican City" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Vatican City</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Victoria" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Victoria</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Vienna" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Vienna</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Vientiane" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Vientiane</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Vilnius" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Vilnius</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Warsaw" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Warsaw</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+			
+			<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Washington, D.C." rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Washington, D.C.</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+			
+			<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Wellington" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Wellington</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+			
+			<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=West Island" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">West Island</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Willemstad" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Willemstad</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Windhoek" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Windhoek</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+			
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Yamoussoukro" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Yamoussoukro</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Yaoundé" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Yaoundé</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Yaren" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Yaren</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Yerevan" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Yerevan</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent;" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				
+				
+				
+				<div class="ui-grid-a" data-theme="a" ><a style="text-decoration:none" href="http://www.zaweather.com/cool.php?name=Zagreb" rel="external">
+            <div class="ui-block-a" style="width:80%;text-align:left;border-top:1px solid transparent;"><div class="ui-bar ui-bar-r" style="height:60px;background:rgba(255,255,255,0.1);" ><p id="lol">Zagreb</p></div></div>
+	        <div class="ui-block-b" style="width:20%;border-top:1px solid transparent" ><div class="ui-bar ui-bar-r"  style="height:60px;background:rgba(255,255,255,0.1);text-shadow:none;color:#fff;text-align:center;"><img src="foto/tap.png" style="margin-top:10px;" width="30" /></div></div>
+			 </a></div>
+				
+				
+				</div>
+		<div data-role="footer" data-position="fixed" style="border:0px solid transparent;" >
+<div class="ui-grid-a" data-theme="a" >
+            <div class="ui-block-a" style="width:100%;border:0px solid transparent;position:fixed;bottom:0px;"><div class="ui-bar ui-bar-r" style="height:45px;background:rgba(0,0,0,0.5);"  id="free">
+			<div style="position:fixed;" ONCLICK="history.go(-1)">
+			<img src="foto/back2.png" width="38" style="margin-top:4px;" />
+			</div>
+			
+			<p style="text-align:center;margin-top:4px">
+			<a href="index.html" rel="external">
+			<img src="foto/home.png" width="38" />
+			</a>
+			</p>
+		
+		<p style="text-align:right;margin-top:-60px"  onclick="history.go(1)">
+			<img src="foto/next2.png" width="38" />
+			</p>
+		
+			</div></div>
+			    </div>
+</div>
+		
+</div>
+
+  </body>
+</html>
