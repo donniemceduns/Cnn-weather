@@ -131,7 +131,7 @@
 					if (options.tweetname) {
 						var name = tweet.user.name;
 
-						html += '<div class="tweetName">'+ link + name +'</a></div>'
+						html += '<div style="color:#fff;" class="tweetName">'+ link + name +'</a></div>'
 					}
 
 					// Add lapsed time if required
@@ -145,9 +145,9 @@
 					var text = tweet.text
 						.replace(/(https?:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/, function (u) {
 							var shortUrl = (u.length > 30) ? u.substr(0, 30) + '...': u;
-							return '<a style="text-decoration:none;color:#e1e1e1;" href="' + u + '" title="Click to view this link">' + shortUrl + '</a>';
+							return '<a style="text-decoration:none;color:#f9f9f9;" href="' + u + '" title="Click to view this link">' + shortUrl + '</a>';
 						})
-						.replace(/@([a-zA-Z0-9_]+)/g, '@<a style="text-decoration:none;color:#F3f3f3;" href="http://twitter.com/$1" title="Click to view $1 on Twitter">$1</a>')
+						.replace(/@([a-zA-Z0-9_]+)/g, '@<a style="text-decoration:none;color:#f9f9f9;" href="http://twitter.com/$1" title="Click to view $1 on Twitter">$1</a>')
 						.replace(/(?:^|\s)#([^\s\.\+:!]+)/g, function (a, u) {
 							return ' <a style="text-decoration:none;color:#F3f3f3;" href="http://twitter.com/search?q=' + encodeURIComponent(u) + '" title="Click to view this on Twitter">#' + u + '</a>';
 						});
